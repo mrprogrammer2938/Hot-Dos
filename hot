@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/python3
 # This Programm Write by Mr.nope
 # Hot-Dos v1.4.3
 import os
